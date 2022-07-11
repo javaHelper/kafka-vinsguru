@@ -59,7 +59,7 @@ INSERT INTO public.purchase_order (id,user_id,product_id,price)
 
 MongoDB holds record:
 
-```json
+```sh
 {
     "_id" : ObjectId("60a536412306ab5bdd7a6b06"),
     "user" : {
@@ -92,7 +92,7 @@ curl --location --request PUT 'http://localhost:8080/user-service/update' \
 
 After I hit the endpoint 
 
-```json
+```sh
 /* 1 */
 {
     "_id" : ObjectId("60a536412306ab5bdd7a6b06"),
