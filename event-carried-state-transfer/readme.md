@@ -2,6 +2,9 @@
 
 Link: https://www.vinsguru.com/event-carried-state-transfer/
 
+<img width="520" alt="Screenshot 2022-07-11 at 5 54 46 PM" src="https://user-images.githubusercontent.com/54174687/178263620-53247f10-7a8b-4cdb-bfe6-833c37901839.png">
+
+
 ```sql
 CREATE TABLE users(
    id serial PRIMARY KEY,
@@ -9,6 +12,7 @@ CREATE TABLE users(
    lastname VARCHAR (50),
    email varchar(50)
 );
+
 
 CREATE TABLE product(
    id serial PRIMARY KEY,
