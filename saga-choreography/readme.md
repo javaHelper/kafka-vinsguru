@@ -59,3 +59,5 @@ GET -> `http://localhost:8080/order/all`
     }
 ]
 ```
+
+<img width="1189" alt="Screenshot 2022-07-12 at 10 58 39 AM" src="https://user-images.githubusercontent.com/54174687/178415477-684c9d4f-d691-4ada-a1d4-e4b255ce7cee.png">
