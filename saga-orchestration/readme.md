@@ -19,3 +19,11 @@ We have an order-service with its own database which is responsible for order ma
 What if we also need to check with inventory-service for the availability of inventory before making the order as complete! Now you see the problem?
 
 In the traditional system design approach, order-service simply sends a HTTP request to get the information about the user’s credit balance. The problem with this approach is order-service assumes that payment-service will be up and running always. Any network issue or performance issue at the payment-service will be propagated to the order-service. It could lead to poor user-experience & we also might lose revenue. Let’s see how we could handle transactions in the distributed systems with loose coupling by using a pattern called Saga Pattern with Event Sourcing approach.
+
+# Saga Pattern:
+Each business transaction which spans multiple Microservices are split into Microservice specific local transactions and they are executed in a sequence to complete the business workflow. It is called Saga. It can be implemented in 2 ways.
+
+- Choreography approach
+- Orchestration approach
+
+In this article, we will be discussing the choreography based approach by using event-sourcing. For orchestration based Saga, check here.
