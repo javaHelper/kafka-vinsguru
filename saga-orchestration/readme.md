@@ -12,3 +12,10 @@ Let’s assume that our business rule says, when an user places an order, order 
 This is very easy to implement in a monolith application. The entire workflow can be considered as 1 single transaction. It is easy to commit / rollback when everything is in a single DB. With distributed systems with multiple databases, It is going to be very complex! Lets look at our architecture first to see how to implement this.
 
 We have an order-service with its own database which is responsible for order management. Similarly we also have payment-service which is responsible for managing payments. So the order-service receives the request and checks with the payment-service if the user has the balance. If the payment-service responds OK, order-service completes the order and payment-service deducts the payment. Otherwise, the order-service cancels the order. For a very simple business requirement, here we have to send multiple requests across the network.
+
+<img width="427" alt="Screenshot 2022-07-17 at 11 09 32 AM" src="https://user-images.githubusercontent.com/54174687/179385483-d649e136-9bfb-4598-9f1c-65189d1e783d.png">
+
+
+What if we also need to check with inventory-service for the availability of inventory before making the order as complete! Now you see the problem?
+
+In the traditional system design approach, order-service simply sends a HTTP request to get the information about the user’s credit balance. The problem with this approach is order-service assumes that payment-service will be up and running always. Any network issue or performance issue at the payment-service will be propagated to the order-service. It could lead to poor user-experience & we also might lose revenue. Let’s see how we could handle transactions in the distributed systems with loose coupling by using a pattern called Saga Pattern with Event Sourcing approach.
