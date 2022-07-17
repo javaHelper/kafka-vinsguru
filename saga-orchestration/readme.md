@@ -27,3 +27,22 @@ Each business transaction which spans multiple Microservices are split into Micr
 - Orchestration approach
 
 In this article, we will be discussing the choreography based approach by using event-sourcing. For orchestration based Saga, check here.
+
+# Event Sourcing:
+In this approach every change to the state of an application is captured as an event. This event is stored in the database /event store (for tracking purposes) and is also published in the event-bus for other parties to consume.
+
+<img width="399" alt="Screenshot 2022-07-17 at 11 13 49 AM" src="https://user-images.githubusercontent.com/54174687/179385610-9d545f4e-eae5-4acc-97e0-dbe1d0007989.png">
+
+The order-service receives a command to create a new order. This request is processed and raised as an order-created event. Couple of things to note here.
+
+1. Order created event basically informs that a new order request has been received and kept in the PENDING/CREATED status by order-service. It is not yet fulfilled.
+2. The event object will be named in the past tense always as it already happened!
+
+Now the payment-service/inventory-service could be interested in listening to those events and reserve/reject payment/inventory. Even these could be treated as an event. Payment reserved/rejected event. Order-service might listen to these events and fulfill / cancel the order request it had originally received.
+
+This approach has many advantages.
+
+There is no service dependency. payment-service/inventory-service do not have to be up and running always.
+- Loose coupling
+- Horizontal scaling
+- Fault tolerant
